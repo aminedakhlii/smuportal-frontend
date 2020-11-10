@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import {Book} from '../models/book.model'
 
 
@@ -12,20 +12,28 @@ export class BmsService {
 
   constructor(private httpClient: HttpClient) { }
 
+  listOfBooks: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
 
-  getBooks(listOfBooks: BehaviorSubject<Book[]>): void {
+  getBooks(): void {
    this.httpClient.get<Book[]>("http://localhost:3000/api/user/getBooks").subscribe({
-    next: (data: Book[]) => listOfBooks.next(data),
+    next: (data: Book[]) => this.listOfBooks.next(data),
     error: (data: any) => console.log(data)
 
   })
   }
 
-  deleteBook(bookISBN: string, listOfBooks: BehaviorSubject<Book[]>, bookRemoved: BehaviorSubject<boolean>): void {
+  getList(): Observable<Book[]> {
+    if(of(this.listOfBooks)) {
+      this.getBooks();
+    }
+    return this.listOfBooks.asObservable();
+  }
+
+  deleteBook(bookISBN: string, bookRemoved: BehaviorSubject<boolean>): void {
      this.httpClient.delete<any>(`http://localhost:3000/api/user/deleteBook/${bookISBN}`).subscribe({
       next: (data: any) => {
         console.log(data);
-        this.deleteBookByID(bookISBN, listOfBooks);
+        this.deleteBookByID(bookISBN);
         bookRemoved.next(true);
       },
       error: (data: any) => console.log(data)
@@ -33,16 +41,30 @@ export class BmsService {
     })
   }
 
-  addBook(book: Book): Observable<any> {
-    return this.httpClient.post<any>("http://localhost:3000/api/user/addBook", book);
+  addBook(book: Book, bookAdded: BehaviorSubject<boolean>): void {
+     this.httpClient.post<any>("http://localhost:3000/api/user/addBook", book).subscribe({
+       next: (data: any) => {
+         bookAdded.next(true);
+        this.addNewBook(book);
+        console.log(data);
+       },
+       error: (data: any) => console.warn(data)
+
+     })
   }
 
-  deleteBookByID(bookISBN: string, listOfBooks: BehaviorSubject<Book[]>) {
-    const books: Book[] = listOfBooks.getValue();
+  private deleteBookByID(bookISBN: string) {
+    const books: Book[] = this.listOfBooks.getValue();
     books.forEach((book, index) => {
       if(book.ISBN === bookISBN) {books.splice(index, 1);}
     })
-    listOfBooks.next(books);
+    this.listOfBooks.next(books);
+  }
+
+  private addNewBook(book: Book) {
+    const books: Book[] = this.listOfBooks.getValue();
+    books.push(book);
+    this.listOfBooks.next(books);
   }
 }
 

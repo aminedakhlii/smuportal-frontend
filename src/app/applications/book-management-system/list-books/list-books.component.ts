@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import {BmsService} from "@app/shared/services"
 import { Book } from "@app/shared/models";
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,19 +16,21 @@ export class ListBooksComponent implements OnInit,OnDestroy{
   // Second
   bookRemoved: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private bmsService: BmsService) { }
+  constructor(private bmsService: BmsService, private router: Router) { }
 
   ngOnInit() {
-    this.bmsService.getBooks(this.listOfBooks);
+   this.bmsService.getList().subscribe(books => this.listOfBooks.next(books));
   }
 
   ngOnDestroy() {
-    this.listOfBooks.unsubscribe();
   }
 
   deleteBook(bookISBN: string) {
-    this.bmsService.deleteBook(bookISBN, this.listOfBooks, this.bookRemoved);
+    this.bmsService.deleteBook(bookISBN, this.bookRemoved);
+  }
 
+  goToAdd() {
+    this.router.navigate(["/apps/bms/add"])
   }
 
 }
