@@ -4,11 +4,20 @@ import { CommonModule } from "@angular/common";
 
 const routes: Routes = [
   {
-    path: "apps",
-    loadChildren: () =>
-      import("./applications.module").then(
-        m => m.ApplicationsModule
-      )
+    path: "apps", children: [
+      {
+        path: "logistics", loadChildren: () =>
+          import("./logistics-reservation/logistics-reservation.module").then(
+            m => m.LogisticsReservationModule
+          )
+      },
+      {
+        path: "bms", loadChildren: () =>
+          import("./book-management-system/book-management-system.module").then(
+            m => m.BookManagementSystemModule
+          )
+      },
+    ]
   }
 ];
 @NgModule({
@@ -16,4 +25,4 @@ const routes: Routes = [
   imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppsModule {}
+export class AppsModule { }
