@@ -29,22 +29,20 @@ export class BmsService {
     return this.listOfBooks.asObservable();
   }
 
-  deleteBook(bookISBN: string, bookRemoved: BehaviorSubject<boolean>): void {
+  deleteBook(bookISBN: string): void {
      this.httpClient.delete<any>(`http://localhost:3000/api/user/deleteBook/${bookISBN}`).subscribe({
       next: (data: any) => {
         console.log(data);
         this.deleteBookByID(bookISBN);
-        bookRemoved.next(true);
       },
       error: (data: any) => console.log(data)
 
     })
   }
 
-  addBook(book: Book, bookAdded: BehaviorSubject<boolean>): void {
+  addBook(book: Book): void {
      this.httpClient.post<any>("http://localhost:3000/api/user/addBook", book).subscribe({
        next: (data: any) => {
-         bookAdded.next(true);
         this.addNewBook(book);
         console.log(data);
        },

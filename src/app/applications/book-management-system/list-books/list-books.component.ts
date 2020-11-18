@@ -16,7 +16,7 @@ export class ListBooksComponent implements OnInit,OnDestroy{
   // Second
   bookRemoved: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private bmsService: BmsService, private router: Router) { }
+  constructor(public bmsService: BmsService, private router: Router) { }
 
   ngOnInit() {
    this.bmsService.getList().subscribe(books => this.listOfBooks.next(books));
@@ -26,7 +26,9 @@ export class ListBooksComponent implements OnInit,OnDestroy{
   }
 
   deleteBook(bookISBN: string) {
-    this.bmsService.deleteBook(bookISBN, this.bookRemoved);
+    this.bmsService.deleteBook(bookISBN);
+    this.bookRemoved.next(true);
+    
   }
 
   goToAdd() {

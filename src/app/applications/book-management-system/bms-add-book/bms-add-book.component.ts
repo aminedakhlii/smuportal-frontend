@@ -27,7 +27,8 @@ export class BmsAddBookComponent implements OnInit {
   onSubmit(book) {
     this.bookForm.reset();
     console.warn("Book Data:",book);
-    this.bmsService.addBook(book, this.bookAdded);
+    this.bmsService.addBook(book);
+    this.bookAdded.next(true);
   }
 
   goBack() {
