@@ -14,7 +14,7 @@ import { RedoPortalModule } from "./redo-portal/redo-portal.module"
 import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from "./app.component";
 import { AppService } from "./shared";
-import { AppsModule } from "./applications/apps.module";
+import { ApplicationsModule } from "./applications/applications.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,7 +32,7 @@ import { AppsModule } from "./applications/apps.module";
     PortalModule,
     ProfileModule,
     RedoPortalModule,
-    AppsModule,
+    ApplicationsModule,
     RouterModule.forRoot([]),
   ],
   providers: [
