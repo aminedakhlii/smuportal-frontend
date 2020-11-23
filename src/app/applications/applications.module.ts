@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 
+
 const routes: Routes = [
   {
     path: "apps",
@@ -9,6 +10,12 @@ const routes: Routes = [
       import("./logistics-reservation/logistics-reservation.module").then(
         m => m.LogisticsReservationModule
       )
+  },
+  {
+    path: "schedule",
+    loadChildren: () => import("./schedule/schedule.module").then(
+      m => m.ScheduleModule
+    )
   }
 ];
 @NgModule({
