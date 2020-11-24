@@ -1,0 +1,45 @@
+
+body{
+
+margin: 0;
+padding: 0;
+font-family: sans-serif;
+
+background:#f7f9fa;
+}
+
+.title {
+    padding-top: 5vw;
+    padding-bottom: 10vw;
+    text-align: center;
+    color:#2980b9;
+}
+
+
+.box {
+
+margin: auto;
+width: 40%;
+padding: 10px;
+}
+
+.button2{
+border: 0;
+background: none;
+display: block;
+margin: 20px auto;
+text-align: center;
+border: 2px solid #2980b9;
+padding: 14px 60px;
+outline: none;
+color: rgb(30, 98, 245);
+border-radius: 10px;
+transition: 0.25s;
+position: relative;
+bottom: 70px;
+}
+.button2:hover{
+
+background: #12b92e;
+color: white;
+}
