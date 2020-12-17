@@ -9,6 +9,8 @@ background:#f7f9fa;
 }
 
 .title {
+    font-size: 4vw;
+    font-weight: bold;
     padding-top: 5vw;
     padding-bottom: 10vw;
     text-align: center;

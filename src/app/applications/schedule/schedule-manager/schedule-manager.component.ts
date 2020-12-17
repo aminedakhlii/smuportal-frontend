@@ -13,7 +13,13 @@ export class ScheduleManagerComponent implements OnInit {
   constructor(private scheduleServiceService : ScheduleServiceService) { }
 
   ngOnInit() {
-    this.scheduleServiceService.hi() ; 
+
+  }
+
+  generate() {
+    this.scheduleServiceService.generate().subscribe(res => {
+
+    });
   }
 
 }

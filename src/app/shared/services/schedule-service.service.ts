@@ -9,7 +9,7 @@ export class ScheduleServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  hi(): Observable<any> {
+  generate(): Observable<any> {
     return this.httpClient.get("http://localhost:3000/api/user/schedule") ;
   }
 }
