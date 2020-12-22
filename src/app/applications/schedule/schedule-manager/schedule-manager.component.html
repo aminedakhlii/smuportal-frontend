@@ -2,16 +2,52 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Schedule Management System</title>
+        <title>Schedula</title>
 
     </head>
     <body>
-        <h1 class="title">Schedule Management System</h1>
-        <div class="box" style="padding-bottom: 10vw;">
-            <button class="button2" style="float: left;">Upload File</button>
-            <button class="button2" style="float: right;" (click)="generate()">Generate</button>
+
+        <div class="tooltip" style="float : right">Help ?
+            <span class="tooltiptext"><pre> Before you upload your Excel file, Please make sure it is divided
+ on 5 worksheets :
+
+ 1st : Room name / Room capacity / Room departement
+
+ 2nd : Professors names
+
+ 3rd : List of all possible time slots (example : 8:30 / 9:30)
+
+ 4th : Course code / Course Professors / Course total number of students
+
+ 5th : Group level (Freshman, Sophmore ...) / Group courses</pre></span>
+          </div>
+
+        <br>
+        <h1 class="title">Schedula</h1>
+        <div class="box2" style="padding-bottom: 5vw;">
+            <p>Welcome to Schedula, your hours of work in just 3 buttons.
+                 If you are not familiar with the platform, please head over to the help button</p>
         </div>
-        <button class="button2">Download File</button>
+
+
+        <div class="box" style="padding-bottom: 10vw;">
+            <input id="browse" #fileInput type="file" (change)="onChange($event)" style="display:none">
+            <label for="browse" class="button2" style="float: left;" (click)="uploadFile()" >Upload File</label>
+            <button class="button2" style="float: right;" (click)="generate()">Generate</button>
+
+        </div>
+        <button class="button2" (click)="download()">Download File</button>
+
+
+        <div class="card" style="float : left">
+            <h1 class="title1">GO Premium</h1>
+            <p class="price">The Premium version allows you to manage complex and big organizations with thousands of students</p>
+            <p><button>LEARN MORE</button></p>
+
+        </div>
+
 
     </body>
+
+
 </html>

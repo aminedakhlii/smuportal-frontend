@@ -18,5 +18,10 @@
     "appName": "Admin Dashboard",
     "iconUrl": "users.png",
     "path": "/apps/admin"
+  },
+  {
+    "appName": "schedule management system",
+    "iconUrl": "schedule.png",
+    "path": "/schedule"
   }
 ]
